@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>ReSampled.Base64</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/superhero/bootstrap.min.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700,600,400&amp;subset=cyrillic,latin"
+          rel="stylesheet" type="text/css">
+    <link href="/media/sticky.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">ReSampled.Base64</a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="http://pointofpresence.ru" rel="nofollow">by point.of.presence</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Begin page content -->
+<div class="container">
+    <div class="page-header">
+        <h1>Генератор data: URL</h1>
+    </div>
+
+    <blockquote>
+        <p>
+            <b>data: URL</b>&nbsp;— это определённая стандартом <a rel="nofollow" href="//tools.ietf.org/html/rfc2397">RFC
+            2397</a>
+            схема, которая позволяет включать небольшие элементы данных в строку <a
+                href="https://ru.wikipedia.org/wiki/URL" rel="nofollow" title="URL">URL</a>,
+            как если бы они были ссылкой на внешний ресурс.</p>
+        <cite title="Wikipedia">Wikipedia</cite>
+    </blockquote>
+
+    <div class="alert alert-danger" id="old-browser" style="display: none">
+        <h4>Ошибка!</h4>
+        <p>Ваш браузер морально устарел. Работа приложения остановлена.</p>
+    </div>
+
+    <div class="row" id="wizard" style="display: none;">
+        <div id="help-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title" id="myModalLabel"> Советы</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <p><span class="glyphicon glyphicon-pushpin"></span> Не кодируйте SVG в base64. Этот формат не содержит опасных символов и может быть использован в &laquo;data: URL&raquo; без обработки.</p>
+                        <p><span class="glyphicon glyphicon-pushpin"></span> Не используйте &laquo;data: URL&raquo; для больших файлов. Старые версии браузеров имеют ограничение на длину URL.</p>
+                        <p><span class="glyphicon glyphicon-pushpin"></span> Для автоматического упаковывания изображений из CSS в base64 можно использовать следующий PHP-скрипт:</p>
+                        <pre>&lt;?php echo preg_replace('/images\/[-\w\/\.]*/ie','"data:image/".((substr("\\0",-4)==".png")?"png":"gif").";base64,".base64_encode(file_get_contents("\\0"))',file_get_contents('style.css')); ?&gt;</pre>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="well" style="position: relative">
+                <form>
+                    <fieldset>
+                        <legend>Шаг 1:
+                            <small>Загрузите изображение</small> <sup><a href="#" data-toggle="modal" data-target="#help-modal"><span class="glyphicon glyphicon-question-sign"></span></a></sup>
+                        </legend>
+
+                        <div class="alert alert-danger error400 fade in">
+                            <h4>Ошибка!</h4>
+                            <p>Ссылка не может быть обработана.</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="input-file" class="control-label">Выберите файл на диске (PNG, GIF, JPEG, SVG, BMP) ...</label>
+                            <input id="input-file" type="file"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-url" class="control-label">... или укажите ссылку на файл</label>
+
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="input-url">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="button" id="input-url-button"><span class="glyphicon glyphicon-download-alt"></span></button>
+                                </span>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="preview">
+                        <img id="my-image" class="img-thumbnail img-responsive" src="data:image/png;base64,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" alt="200x200.png" />
+                    </div>
+                </form>
+
+                <div class="preloader"></div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="well">
+                <form>
+                    <fieldset id="inputs">
+                        <legend>Шаг 2:
+                            <small>Скопируйте код</small>
+                        </legend>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir,gplus" data-yashareTheme="counter"></div>
+    </div>
+</footer>
+
+<script type="text/template" id="template-input-dataUrl">
+    <%= code %>
+</script>
+
+<script type="text/template" id="template-input-imgTag">
+    <img src="<%= code %>" alt="<%- name %>" />
+</script>
+
+<script type="text/template" id="template-input-backgroundUrl">
+    background: url('<%= code %>'); /* <%- name %> */
+</script>
+
+<script type="text/template" id="template-input-backgroundImage">
+    background-image: url('<%= code %>'); /* <%- name %> */
+</script>
+
+<script type="text/template" id="template-input">
+    <% _.each(collection, function(input) { %>
+    <div class="form-group">
+        <label for="<%= input.id %>" class="control-label"><%= input.label %></label>
+        <input type="text" class="form-control result-input" id="<%= input.id %>" placeholder="<%= input.placeholder %>" readonly />
+    </div>
+    <% }); %>
+</script>
+
+<script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/media/fileinput.js"></script>
+<script type="text/javascript" src="/media/main.js"></script>
+</body>
+</html>
