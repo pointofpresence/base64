@@ -1,0 +1,44 @@
+{
+  "name": "base64",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pointofpresence/base64.git"
+  },
+  "keywords": [
+    "base64",
+    "css"
+  ],
+  "author": "pointofpresence",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pointofpresence/base64/issues"
+  },
+  "homepage": "https://github.com/pointofpresence/base64#readme",
+  "devDependencies": {
+    "bootstrap": "^3.3.6",
+    "bootswatch": "^3.3.6",
+    "chalk": "^1.1.3",
+    "dateformat": "^1.0.12",
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-csso": "^2.0.0",
+    "gulp-header": "^1.7.1",
+    "gulp-less": "^3.0.5",
+    "gulp-load-plugins": "^1.2.2",
+    "gulp-out": "0.0.1",
+    "gulp-replace": "^0.5.4",
+    "gulp-size": "^2.1.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-util": "^3.0.7",
+    "mkdirp": "^0.5.1",
+    "require-dir": "^0.3.0",
+    "run-sequence": "^1.1.5"
+  }
+}
